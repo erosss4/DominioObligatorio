@@ -24,6 +24,7 @@ namespace DominioObligatorio
             this.canal = canal;
             this.entregoCredenciales = entregoCredenciales;
             this.huboTransferenciaDatos = huboTransferenciaDatos;
+            Validar();
         }
 
         public override void Validar()

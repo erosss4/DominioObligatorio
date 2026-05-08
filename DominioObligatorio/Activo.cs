@@ -23,8 +23,8 @@ namespace DominioObligatorio
             this.tipoActivo = tipoActivo;
             this.criticidad = criticidad;
             this.tieneBackup = tieneBackup;
-
             codigo = GenerarCodigo();
+            Validar();
         }
 
         public string Codigo

@@ -17,12 +17,7 @@ namespace DominioObligatorio
 
         private static int ultId = 1;
 
-        public Incidente(DateTime fechaReportado,
-                         string descripcion,
-                         EstadoIncidente estado,
-                         int impacto,
-                         int probabilidad,
-                         Activo activo)
+        public Incidente(DateTime fechaReportado, string descripcion, EstadoIncidente estado, int impacto, int probabilidad, Activo activo)
         {
             id = ultId;
             ultId++;
@@ -33,6 +28,7 @@ namespace DominioObligatorio
             this.impacto = impacto;
             this.probabilidad = probabilidad;
             this.activo = activo;
+            Validar();
         }
 
         public int Id

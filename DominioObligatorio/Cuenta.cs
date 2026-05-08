@@ -22,6 +22,7 @@ namespace DominioObligatorio
 
             this.mfaHabilitado = mfaHabilitado;
             this.fechaUltimoCambioContrasenia = fechaUltimoCambioContrasenia;
+            Validar();
         }
 
         public int CodigoUsuario
