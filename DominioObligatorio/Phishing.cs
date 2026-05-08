@@ -8,19 +8,25 @@ namespace DominioObligatorio
     {
         private string canal;
         private bool entregoCredenciales;
-        private bool transferenciaDatos;
+        private bool huboTransferenciaDatos;
 
-        public Phishing(DateTime fechaReportado, Activo activo, string descripcion,
-                        EstadoIncidente estado, int impacto, int probabilidad,
-                        string canal, bool entregoCredenciales, bool transferenciaDatos)
-            : base(fechaReportado, activo, descripcion, estado, impacto, probabilidad)
+        public Phishing(DateTime fechaReportado,
+                         string descripcion,
+                         EstadoIncidente estado,
+                         int impacto,
+                         int probabilidad,
+                         Activo activo,
+                         string canal,
+                         bool entregoCredenciales,
+                         bool huboTransferenciaDatos)
+            : base(fechaReportado, descripcion, estado, impacto, probabilidad, activo)
         {
             this.canal = canal;
             this.entregoCredenciales = entregoCredenciales;
-            this.transferenciaDatos = transferenciaDatos;
+            this.huboTransferenciaDatos = huboTransferenciaDatos;
         }
 
-        public void Validar()
+        public override void Validar()
         {
             base.Validar();
 
@@ -28,14 +34,9 @@ namespace DominioObligatorio
                 throw new Exception("El canal no puede ser vacío");
         }
 
-        public override bool EsDePersona(Persona p)
-        {
-            return Activo.CuentaResponsable.Titular.Equals(p);
-        }
-
         public override string ToString()
         {
-            return "Phishing - " + base.ToString();
+            return $"PHISHING - {Descripcion}";
         }
     }
 }

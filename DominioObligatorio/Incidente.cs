@@ -1,4 +1,4 @@
-﻿using Dominio.Interfaces;
+﻿using DominioObligatorio.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,25 +8,31 @@ namespace DominioObligatorio
     public abstract class Incidente : IValidable
     {
         private int id;
-        private static int ultId = 1;
-
         private DateTime fechaReportado;
-        private Activo activo;
         private string descripcion;
         private EstadoIncidente estado;
         private int impacto;
         private int probabilidad;
+        private Activo activo;
 
-        public Incidente(DateTime fechaReportado, Activo activo, string descripcion,
-                         EstadoIncidente estado, int impacto, int probabilidad)
+        private static int ultId = 1;
+
+        public Incidente(DateTime fechaReportado,
+                         string descripcion,
+                         EstadoIncidente estado,
+                         int impacto,
+                         int probabilidad,
+                         Activo activo)
         {
-            id = ultId++;
+            id = ultId;
+            ultId++;
+
             this.fechaReportado = fechaReportado;
-            this.activo = activo;
             this.descripcion = descripcion;
             this.estado = estado;
             this.impacto = impacto;
             this.probabilidad = probabilidad;
+            this.activo = activo;
         }
 
         public int Id
@@ -34,9 +40,14 @@ namespace DominioObligatorio
             get { return id; }
         }
 
-        public Activo Activo
+        public DateTime FechaReportado
         {
-            get { return activo; }
+            get { return fechaReportado; }
+        }
+
+        public string Descripcion
+        {
+            get { return descripcion; }
         }
 
         public EstadoIncidente Estado
@@ -44,11 +55,23 @@ namespace DominioObligatorio
             get { return estado; }
         }
 
-        public void Validar()
+        public int Impacto
         {
-            if (activo == null)
-                throw new Exception("El activo no puede ser nulo");
+            get { return impacto; }
+        }
 
+        public int Probabilidad
+        {
+            get { return probabilidad; }
+        }
+
+        public Activo Activo
+        {
+            get { return activo; }
+        }
+
+        public virtual void Validar()
+        {
             if (string.IsNullOrEmpty(descripcion))
                 throw new Exception("La descripción no puede ser vacía");
 
@@ -57,13 +80,29 @@ namespace DominioObligatorio
 
             if (probabilidad < 1 || probabilidad > 5)
                 throw new Exception("Probabilidad inválida");
+
+            if (activo == null)
+                throw new Exception("El activo no puede ser nulo");
         }
 
-        public abstract bool EsDePersona(Persona p);
+        public bool EsDePersona(Persona p)
+        {
+            foreach (Cuenta c in p.Cuentas)
+            {
+                foreach (Activo a in c.Activos)
+                {
+                    if (a == activo)
+                    {
+                        return true;
+                    }
+                }
+            }
 
+            return false;
+        }
         public override string ToString()
         {
-            return "Incidente " + id + " - " + estado;
+            return $"{id} - {estado} - {descripcion}";
         }
     }
 }

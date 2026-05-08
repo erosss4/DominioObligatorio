@@ -7,30 +7,25 @@ namespace DominioObligatorio
     public class Ransomware : Incidente
     {
         private bool datosEncriptados;
-        private bool exfiltracion;
+        private bool huboExfiltracion;
 
-        public Ransomware(DateTime fechaReportado, Activo activo, string descripcion,
-                          EstadoIncidente estado, int impacto, int probabilidad,
-                          bool datosEncriptados, bool exfiltracion)
-            : base(fechaReportado, activo, descripcion, estado, impacto, probabilidad)
+        public Ransomware(DateTime fechaReportado,
+                          string descripcion,
+                          EstadoIncidente estado,
+                          int impacto,
+                          int probabilidad,
+                          Activo activo,
+                          bool datosEncriptados,
+                          bool huboExfiltracion)
+            : base(fechaReportado, descripcion, estado, impacto, probabilidad, activo)
         {
             this.datosEncriptados = datosEncriptados;
-            this.exfiltracion = exfiltracion;
-        }
-
-        public void Validar()
-        {
-            base.Validar();
-        }
-
-        public override bool EsDePersona(Persona p)
-        {
-            return Activo.CuentaResponsable.Titular.Equals(p);
+            this.huboExfiltracion = huboExfiltracion;
         }
 
         public override string ToString()
         {
-            return "Ransomware - " + base.ToString();
+            return $"RANSOMWARE - {Descripcion}";
         }
     }
 }

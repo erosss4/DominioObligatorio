@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Dominio.Interfaces
+namespace DominioObligatorio.Interfaces
 {
     public interface IValidable
     {

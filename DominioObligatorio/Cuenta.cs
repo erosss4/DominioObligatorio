@@ -1,4 +1,4 @@
-﻿using Dominio.Interfaces;
+﻿using DominioObligatorio.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,31 +8,59 @@ namespace DominioObligatorio
     public class Cuenta : IValidable
     {
         private int codigoUsuario;
-        private static int ultCodigo = 1;
         private bool mfaHabilitado;
         private DateTime fechaUltimoCambioContrasenia;
-        private Persona titular;
-        public Cuenta(bool mfaHabilitado, DateTime fechaUltimoCambioContrasenia, Persona titular)
+
+        private static int ultCodigo = 1;
+
+        private List<Activo> activos = new List<Activo>();
+
+        public Cuenta(bool mfaHabilitado, DateTime fechaUltimoCambioContrasenia)
         {
-            codigoUsuario = ultCodigo++;
+            codigoUsuario = ultCodigo;
+            ultCodigo++;
+
             this.mfaHabilitado = mfaHabilitado;
             this.fechaUltimoCambioContrasenia = fechaUltimoCambioContrasenia;
-            this.titular = titular;
         }
+
         public int CodigoUsuario
         {
             get { return codigoUsuario; }
         }
-        public Persona Titular
+
+        public bool MfaHabilitado
         {
-            get { return titular; }
+            get { return mfaHabilitado; }
         }
+
+        public DateTime FechaUltimoCambioContrasenia
+        {
+            get { return fechaUltimoCambioContrasenia; }
+        }
+
+        public List<Activo> Activos
+        {
+            get { return activos; }
+        }
+
+        public void AgregarActivo(Activo a)
+        {
+            if (a == null)
+                throw new Exception("El activo no puede ser nulo");
+
+            activos.Add(a);
+        }
+
         public void Validar()
         {
-            if (titular == null)
-                throw new Exception("La cuenta debe tener titular");
-            if (fechaUltimoCambioContrasenia == DateTime.MinValue)
+            if (fechaUltimoCambioContrasenia == new DateTime())
                 throw new Exception("Fecha inválida");
+        }
+
+        public override string ToString()
+        {
+            return $"Cuenta {codigoUsuario}";
         }
     }
 }
