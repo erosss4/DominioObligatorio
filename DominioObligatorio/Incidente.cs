@@ -73,7 +73,7 @@ namespace DominioObligatorio
         public virtual void Validar()
         {
             if (string.IsNullOrEmpty(descripcion))
-                throw new Exception("La descripción no puede ser vacía");
+                throw new Exception("Descripción inválida");
 
             if (impacto < 1 || impacto > 5)
                 throw new Exception("Impacto inválido");
@@ -82,27 +82,13 @@ namespace DominioObligatorio
                 throw new Exception("Probabilidad inválida");
 
             if (activo == null)
-                throw new Exception("El activo no puede ser nulo");
+                throw new Exception("Activo inválido");
         }
 
-        public bool EsDePersona(Persona p)
-        {
-            foreach (Cuenta c in p.Cuentas)
-            {
-                foreach (Activo a in c.Activos)
-                {
-                    if (a == activo)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
         public override string ToString()
         {
-            return $"{id} - {estado} - {descripcion}";
+            return $"{id} - {descripcion}";
         }
     }
 }
+
