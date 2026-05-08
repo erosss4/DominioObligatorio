@@ -1,5 +1,4 @@
 <Solution>
   <Project Path="ConsoleAppObligatorio/ConsoleAppObligatorio.csproj" Id="34b08d07-933d-456c-8454-9170117fa404" />
   <Project Path="DominioObligatorio/DominioObligatorio.csproj" />
-  <Project Path="WebApplicationObligatorio/WebApplicationObligatorio.csproj" Id="70c263fd-5a7d-4ad8-aa70-1994ac56dfdc" />
 </Solution>
