@@ -11,14 +11,12 @@ namespace DominioObligatorio
         private List<Incidente> _incidentes = new List<Incidente>();
 
 
-        // ### Falta en el Astah ### -- CrearActivo
         public void CrearActivo(Activo a)
         {
             if (a == null) throw new Exception("El activo no puede ser nulo");
             _activos.Add(a);
         }
 
-        // ### Falta en el Astah ### -- CrearIncidente
         public void CrearIncidente(Incidente i)
         {
             if (i == null) throw new Exception("El incidente no puede ser nulo");

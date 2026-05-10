@@ -15,12 +15,12 @@ namespace DominioObligatorio
         private int _probabilidad;
         private Activo _activo;
 
-        private static int _ultId = 1;
+        private static int s_ultId = 1;
 
         public Incidente(DateTime fechaReportado, string descripcion, EstadoIncidente estado, int impacto, int probabilidad, Activo activo)
         {
-            _id = _ultId;
-            _ultId++;
+            _id = s_ultId;
+            s_ultId++;
 
             _fechaReportado = fechaReportado;
             _descripcion = descripcion;

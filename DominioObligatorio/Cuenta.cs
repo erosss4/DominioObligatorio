@@ -10,14 +10,14 @@ namespace DominioObligatorio
         private int _codigoUsuario;
         private bool _mfaHabilitado;
         private DateTime _fechaUltimoCambioContrasenia;
-        private static int _ultCodigo = 1;
+        private static int s_ultCodigo = 1;
 
         private List<Activo> _activos = new List<Activo>();
 
         public Cuenta(bool mfaHabilitado, DateTime fechaUltimoCambioContrasenia)
         {
-            _codigoUsuario = _ultCodigo;
-            _ultCodigo++;
+            _codigoUsuario = s_ultCodigo;
+            s_ultCodigo++;
 
             _mfaHabilitado = mfaHabilitado;
             _fechaUltimoCambioContrasenia = fechaUltimoCambioContrasenia;
