@@ -6,8 +6,8 @@ namespace DominioObligatorio
 {
     public class Ransomware : Incidente
     {
-        private bool datosEncriptados;
-        private bool huboExfiltracion;
+        private bool _datosEncriptados;
+        private bool _huboExfiltracion;
 
         public Ransomware(DateTime fechaReportado,
                           string descripcion,
@@ -19,8 +19,8 @@ namespace DominioObligatorio
                           bool huboExfiltracion)
             : base(fechaReportado, descripcion, estado, impacto, probabilidad, activo)
         {
-            this.datosEncriptados = datosEncriptados;
-            this.huboExfiltracion = huboExfiltracion;
+            _datosEncriptados = datosEncriptados;
+            _huboExfiltracion = huboExfiltracion;
         }
 
         public override string ToString()

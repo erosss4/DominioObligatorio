@@ -6,9 +6,9 @@ namespace DominioObligatorio
 {
     public class Phishing : Incidente
     {
-        private string canal;
-        private bool entregoCredenciales;
-        private bool huboTransferenciaDatos;
+        private string _canal;
+        private bool _entregoCredenciales;
+        private bool _huboTransferenciaDatos;
 
         public Phishing(DateTime fechaReportado,
                          string descripcion,
@@ -21,9 +21,9 @@ namespace DominioObligatorio
                          bool huboTransferenciaDatos)
             : base(fechaReportado, descripcion, estado, impacto, probabilidad, activo)
         {
-            this.canal = canal;
-            this.entregoCredenciales = entregoCredenciales;
-            this.huboTransferenciaDatos = huboTransferenciaDatos;
+            _canal = canal;
+            _entregoCredenciales = entregoCredenciales;
+            _huboTransferenciaDatos = huboTransferenciaDatos;
             Validar();
         }
 
@@ -31,7 +31,7 @@ namespace DominioObligatorio
         {
             base.Validar();
 
-            if (string.IsNullOrEmpty(canal))
+            if (string.IsNullOrEmpty(_canal))
                 throw new Exception("El canal no puede ser vacío");
         }
 

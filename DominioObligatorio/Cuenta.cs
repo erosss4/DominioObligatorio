@@ -7,42 +7,41 @@ namespace DominioObligatorio
 {
     public class Cuenta : IValidable
     {
-        private int codigoUsuario;
-        private bool mfaHabilitado;
-        private DateTime fechaUltimoCambioContrasenia;
+        private int _codigoUsuario;
+        private bool _mfaHabilitado;
+        private DateTime _fechaUltimoCambioContrasenia;
+        private static int _ultCodigo = 1;
 
-        private static int ultCodigo = 1;
-
-        private List<Activo> activos = new List<Activo>();
+        private List<Activo> _activos = new List<Activo>();
 
         public Cuenta(bool mfaHabilitado, DateTime fechaUltimoCambioContrasenia)
         {
-            codigoUsuario = ultCodigo;
-            ultCodigo++;
+            _codigoUsuario = _ultCodigo;
+            _ultCodigo++;
 
-            this.mfaHabilitado = mfaHabilitado;
-            this.fechaUltimoCambioContrasenia = fechaUltimoCambioContrasenia;
+            _mfaHabilitado = mfaHabilitado;
+            _fechaUltimoCambioContrasenia = fechaUltimoCambioContrasenia;
             Validar();
         }
 
         public int CodigoUsuario
         {
-            get { return codigoUsuario; }
+            get { return _codigoUsuario; }
         }
 
         public bool MfaHabilitado
         {
-            get { return mfaHabilitado; }
+            get { return _mfaHabilitado; }
         }
 
         public DateTime FechaUltimoCambioContrasenia
         {
-            get { return fechaUltimoCambioContrasenia; }
+            get { return _fechaUltimoCambioContrasenia; }
         }
 
         public List<Activo> Activos
         {
-            get { return activos; }
+            get { return _activos; }
         }
 
         public void AgregarActivo(Activo a)
@@ -50,18 +49,18 @@ namespace DominioObligatorio
             if (a == null)
                 throw new Exception("El activo no puede ser nulo");
 
-            activos.Add(a);
+            _activos.Add(a);
         }
 
         public void Validar()
         {
-            if (fechaUltimoCambioContrasenia == new DateTime())
+            if (_fechaUltimoCambioContrasenia == new DateTime())
                 throw new Exception("Fecha inválida");
         }
 
         public override string ToString()
         {
-            return $"Cuenta {codigoUsuario}";
+            return $"Cuenta {_codigoUsuario}";
         }
     }
 }

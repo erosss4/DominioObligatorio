@@ -7,84 +7,83 @@ namespace DominioObligatorio
 {
     public abstract class Incidente : IValidable
     {
-        private int id;
-        private DateTime fechaReportado;
-        private string descripcion;
-        private EstadoIncidente estado;
-        private int impacto;
-        private int probabilidad;
-        private Activo activo;
+        private int _id;
+        private DateTime _fechaReportado;
+        private string _descripcion;
+        private EstadoIncidente _estado;
+        private int _impacto;
+        private int _probabilidad;
+        private Activo _activo;
 
-        private static int ultId = 1;
+        private static int _ultId = 1;
 
         public Incidente(DateTime fechaReportado, string descripcion, EstadoIncidente estado, int impacto, int probabilidad, Activo activo)
         {
-            id = ultId;
-            ultId++;
+            _id = _ultId;
+            _ultId++;
 
-            this.fechaReportado = fechaReportado;
-            this.descripcion = descripcion;
-            this.estado = estado;
-            this.impacto = impacto;
-            this.probabilidad = probabilidad;
-            this.activo = activo;
+            _fechaReportado = fechaReportado;
+            _descripcion = descripcion;
+            _estado = estado;
+            _impacto = impacto;
+            _probabilidad = probabilidad;
+            _activo = activo;
             Validar();
         }
 
         public int Id
         {
-            get { return id; }
+            get { return _id; }
         }
 
         public DateTime FechaReportado
         {
-            get { return fechaReportado; }
+            get { return _fechaReportado; }
         }
 
         public string Descripcion
         {
-            get { return descripcion; }
+            get { return _descripcion; }
         }
 
         public EstadoIncidente Estado
         {
-            get { return estado; }
+            get { return _estado; }
         }
 
         public int Impacto
         {
-            get { return impacto; }
+            get { return _impacto; }
         }
 
         public int Probabilidad
         {
-            get { return probabilidad; }
+            get { return _probabilidad; }
         }
 
         public Activo Activo
         {
-            get { return activo; }
+            get { return _activo; }
         }
 
         public virtual void Validar()
         {
-            if (string.IsNullOrEmpty(descripcion))
+            if (string.IsNullOrEmpty(_descripcion))
                 throw new Exception("Descripción inválida");
 
-            if (impacto < 1 || impacto > 5)
+            if (_impacto < 1 || _impacto > 5)
                 throw new Exception("Impacto inválido");
 
-            if (probabilidad < 1 || probabilidad > 5)
+            if (_probabilidad < 1 || _probabilidad > 5)
                 throw new Exception("Probabilidad inválida");
 
-            if (activo == null)
+            if (_activo == null)
                 throw new Exception("Activo inválido");
         }
 
         public override string ToString()
         {
-            return $"{id} - {descripcion}";
+            return $"{_id} - {_descripcion}";
         }
     }
 }
-

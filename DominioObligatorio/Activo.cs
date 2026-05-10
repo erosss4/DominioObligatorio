@@ -7,74 +7,74 @@ namespace DominioObligatorio
 {
     public class Activo : IValidable
     {
-        private string codigo;
-        private string nombre;
-        private TipoActivo tipoActivo;
-        private int criticidad;
-        private bool tieneBackup;
+        private string _codigo;
+        private string _nombre;
+        private TipoActivo _tipoActivo;
+        private int _criticidad;
+        private bool _tieneBackup;
 
-        private static int contadorPC = 1;
-        private static int contadorSERVER = 1;
-        private static int contadorMOVIL = 1;
+        private static int _contadorPC = 1;
+        private static int _contadorSERVER = 1;
+        private static int _contadorMOVIL = 1;
 
         public Activo(string nombre, TipoActivo tipoActivo, int criticidad, bool tieneBackup)
         {
-            this.nombre = nombre;
-            this.tipoActivo = tipoActivo;
-            this.criticidad = criticidad;
-            this.tieneBackup = tieneBackup;
-            codigo = GenerarCodigo();
+            _nombre = nombre;
+            _tipoActivo = tipoActivo;
+            _criticidad = criticidad;
+            _tieneBackup = tieneBackup;
+            _codigo = GenerarCodigo();
             Validar();
         }
 
         public string Codigo
         {
-            get { return codigo; }
+            get { return _codigo; }
         }
 
         public string Nombre
         {
-            get { return nombre; }
+            get { return _nombre; }
         }
 
         public TipoActivo TipoActivo
         {
-            get { return tipoActivo; }
+            get { return _tipoActivo; }
         }
 
         public int Criticidad
         {
-            get { return criticidad; }
+            get { return _criticidad; }
         }
 
         public bool TieneBackup
         {
-            get { return tieneBackup; }
+            get { return _tieneBackup; }
         }
         private string GenerarCodigo()
         {
             int numero = 0;
 
-            if (tipoActivo == TipoActivo.PC)
-                numero = contadorPC++;
-            else if (tipoActivo == TipoActivo.SERVER)
-                numero = contadorSERVER++;
+            if (_tipoActivo == TipoActivo.PC)
+                numero = _contadorPC++;
+            else if (_tipoActivo == TipoActivo.SERVER)
+                numero = _contadorSERVER++;
             else
-                numero = contadorMOVIL++;
+                numero = _contadorMOVIL++;
 
-            return tipoActivo + numero.ToString("D4");
+            return _tipoActivo + numero.ToString("D4");
         }
         
         public void Validar()
         {
-            if (string.IsNullOrEmpty(nombre))
+            if (string.IsNullOrEmpty(_nombre))
                 throw new Exception("Nombre inválido");
-            if (criticidad < 1 || criticidad > 5)
+            if (_criticidad < 1 || _criticidad > 5)
                 throw new Exception("Criticidad inválida");
         }
         public override string ToString()
         {
-            return codigo + " - " + nombre;
+            return _codigo + " - " + _nombre;
         }
     }
 }
