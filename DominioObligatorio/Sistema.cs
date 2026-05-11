@@ -29,8 +29,8 @@ namespace DominioObligatorio
         public void CrearPersona(Persona p)
         {
             if (p == null) throw new Exception("La persona no puede ser nula");
-            p.Validar();
             if (_personas.Contains(p)) throw new Exception("La cedula ya existe");
+            p.Validar();
             _personas.Add(p);
         }
         

@@ -51,7 +51,7 @@ namespace DominioObligatorio
         {
             if (c == null)
                 throw new Exception("La cuenta no puede ser nula");
-
+            c.Validar();
             _cuentas.Add(c);
         }
 
