@@ -20,7 +20,6 @@ namespace DominioObligatorio
             _nombre = nombre;
             _email = email;
             _telefono = telefono;
-            Validar();
         }
 
         public string Cedula

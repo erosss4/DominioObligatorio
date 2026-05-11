@@ -24,7 +24,6 @@ namespace DominioObligatorio
             _canal = canal;
             _entregoCredenciales = entregoCredenciales;
             _huboTransferenciaDatos = huboTransferenciaDatos;
-            Validar();
         }
 
         public override void Validar()

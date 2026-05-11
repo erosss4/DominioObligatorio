@@ -24,7 +24,6 @@ namespace DominioObligatorio
             _criticidad = criticidad;
             _tieneBackup = tieneBackup;
             _codigo = GenerarCodigo();
-            Validar();
         }
 
         public string Codigo

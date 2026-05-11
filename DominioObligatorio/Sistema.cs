@@ -14,13 +14,16 @@ namespace DominioObligatorio
         public void CrearActivo(Activo a)
         {
             if (a == null) throw new Exception("El activo no puede ser nulo");
+            a.Validar();
             _activos.Add(a);
         }
 
         public void CrearIncidente(Incidente i)
         {
             if (i == null) throw new Exception("El incidente no puede ser nulo");
+            i.Validar();
             _incidentes.Add(i);
+
         }
         
         public void CrearPersona(Persona p)

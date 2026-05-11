@@ -28,7 +28,6 @@ namespace DominioObligatorio
             _impacto = impacto;
             _probabilidad = probabilidad;
             _activo = activo;
-            Validar();
         }
 
         public int Id

@@ -21,7 +21,6 @@ namespace DominioObligatorio
 
             _mfaHabilitado = mfaHabilitado;
             _fechaUltimoCambioContrasenia = fechaUltimoCambioContrasenia;
-            Validar();
         }
 
         public int CodigoUsuario
