@@ -84,5 +84,15 @@ namespace DominioObligatorio
         {
             return $"{_id} - {_descripcion}";
         }
+        
+        public bool EsDePersona(Persona p)
+        {
+            foreach (Cuenta c in p.Cuentas)
+            {
+                if (c.Activos.Contains(_activo))
+                    return true;
+            }
+            return false;
+        }
     }
 }

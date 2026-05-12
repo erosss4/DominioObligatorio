@@ -28,6 +28,17 @@ namespace ConsoleAppObligatorio
             {
                 Console.WriteLine(a.ToString());
             }
+            
+            // 4B
+            Console.WriteLine("=== INCIDENTES DE ANA GARCÍA ===");
+            Persona ana = sis.ObtenerPersonasConActivos()[0]; // primera persona
+            List<Incidente> incidentes = sis.ObtenerIncidentesDePersona(ana);
+
+            if (incidentes.Count == 0)
+                Console.WriteLine("Sin incidentes.");
+            else
+                foreach (Incidente i in incidentes)
+                    Console.WriteLine(i.ToString());
         }
     }
 }
