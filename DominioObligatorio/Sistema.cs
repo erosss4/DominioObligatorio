@@ -34,27 +34,20 @@ namespace DominioObligatorio
             _personas.Add(p);
         }
         
-        public List<Persona> ObtenerPersonasConActivos()
+        // EJERCICIO 4A
+        public List<Persona> ObtenerPersonas()
         {
             return _personas;
         }
-        
         public List<Activo> ObtenerActivosDePersona(Persona p)
         {
             if (p == null) throw new Exception("La persona no puede ser nula");
-
             List<Activo> resultado = new List<Activo>();
-            foreach (Activo a in _activos)
+            foreach (Cuenta c in p.Cuentas)
             {
-                foreach (Cuenta c in p.Cuentas)
-                {
-                    if (c.Activos.Contains(a))
-                    {
-                        resultado.Add(a);
-                        break;
-                    }
-                }
+                resultado.AddRange(c.Activos);
             }
+
             return resultado;
         }
 

@@ -10,14 +10,17 @@ namespace ConsoleAppObligatorio
             sis.Precargar();
 
             Console.WriteLine("=== PERSONAS Y SUS ACTIVOS ===");
-            foreach (Persona p in sis.ObtenerPersonasConActivos())
+
+            foreach (Persona p in sis.ObtenerPersonas())
             {
-                Console.WriteLine(p.ToString());
+                Console.WriteLine(p);
+
                 foreach (Activo a in sis.ObtenerActivosDePersona(p))
                 {
-                    Console.WriteLine("  -> " + a.ToString());
+                    Console.WriteLine("  -> " + a);
                 }
-                Console.WriteLine();
+
+                Console.WriteLine("====================");
             }
 
             Console.WriteLine("=== ACTIVOS SIN BACKUP ===");
