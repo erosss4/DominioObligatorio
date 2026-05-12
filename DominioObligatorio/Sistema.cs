@@ -25,7 +25,23 @@ namespace DominioObligatorio
             _incidentes.Add(i);
 
         }
-        
+        // 4A
+        public List<Persona> ObtenerPersonas()
+        {
+            return _personas;
+        }
+        public List<Activo> ObtenerActivosDePersona(Persona p)
+        {
+            if (p == null) throw new Exception("La persona no puede ser nula");
+            List<Activo> resultado = new List<Activo>();
+            foreach (Cuenta c in p.Cuentas)
+            {
+                resultado.AddRange(c.Activos);
+            }
+
+            return resultado;
+        }
+
         // 4B
         public List<Incidente> ObtenerIncidentesDePersona(Persona p)
         {
@@ -49,22 +65,6 @@ namespace DominioObligatorio
             _personas.Add(p);
         }
         
-        // EJERCICIO 4A
-        public List<Persona> ObtenerPersonas()
-        {
-            return _personas;
-        }
-        public List<Activo> ObtenerActivosDePersona(Persona p)
-        {
-            if (p == null) throw new Exception("La persona no puede ser nula");
-            List<Activo> resultado = new List<Activo>();
-            foreach (Cuenta c in p.Cuentas)
-            {
-                resultado.AddRange(c.Activos);
-            }
-
-            return resultado;
-        }
 
         //4D
         public List<Activo> ActivosSinBackup()

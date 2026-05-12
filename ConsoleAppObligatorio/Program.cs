@@ -31,7 +31,7 @@ namespace ConsoleAppObligatorio
             
             // 4B
             Console.WriteLine("=== INCIDENTES DE ANA GARCÍA ===");
-            Persona ana = sis.ObtenerPersonasConActivos()[0]; // primera persona
+            Persona ana = sis.ObtenerPersonas()[0]; // primera persona
             List<Incidente> incidentes = sis.ObtenerIncidentesDePersona(ana);
 
             if (incidentes.Count == 0)
