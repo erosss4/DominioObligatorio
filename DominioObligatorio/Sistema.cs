@@ -26,6 +26,21 @@ namespace DominioObligatorio
 
         }
         
+        // 4B
+        public List<Incidente> ObtenerIncidentesDePersona(Persona p)
+        {
+            if (p == null) throw new Exception("La persona no puede ser nula");
+
+            List<Incidente> resultado = new List<Incidente>();
+            foreach (Incidente i in _incidentes)
+            {
+                if (i.EsDePersona(p))
+                    resultado.Add(i);
+            }
+            return resultado;
+        }
+        
+        // 4C
         public void CrearPersona(Persona p)
         {
             if (p == null) throw new Exception("La persona no puede ser nula");
@@ -58,6 +73,7 @@ namespace DominioObligatorio
             return resultado;
         }
 
+        //4D
         public List<Activo> ActivosSinBackup()
         {
             List<Activo> resultado = new List<Activo>();
@@ -226,6 +242,7 @@ namespace DominioObligatorio
             CrearIncidente(new Ransomware(new DateTime(2025, 4, 12), "Ataque final", EstadoIncidente.CERRADO, 5, 5, a15, true, true));
         }
 
+        
     }
 
 }
