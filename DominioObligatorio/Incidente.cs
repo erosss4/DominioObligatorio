@@ -14,6 +14,7 @@ namespace DominioObligatorio
         private int _impacto;
         private int _probabilidad;
         private Activo _activo;
+        
 
         private static int s_ultId = 1;
 
@@ -93,6 +94,14 @@ namespace DominioObligatorio
                     return true;
             }
             return false;
+        }
+
+        public virtual int CalcularSeveridad()
+        {
+            int severidad = Impacto * 12 + Probabilidad * 8;
+            if (severidad > 100)
+                severidad = 100;
+            return severidad;
         }
     }
 }

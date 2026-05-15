@@ -94,6 +94,7 @@ namespace DominioObligatorio
             Persona p8 = new Persona("82345678", "Valentina Castro", "valentina@empresa.com", "099888888");
             Persona p9 = new Persona("92345678", "Diego Torres", "diego@empresa.com", "099999999");
             Persona p10 = new Persona("10345678", "Camila Díaz", "camila@empresa.com", "098111111");
+            Persona p11 = new Persona("4444", "Rodolfo Antunez", "rodolfo@empresa.com", "098111111");
 
             CrearPersona(p1);
             CrearPersona(p2);
@@ -105,6 +106,7 @@ namespace DominioObligatorio
             CrearPersona(p8);
             CrearPersona(p9);
             CrearPersona(p10);
+            CrearPersona(p11);
 
             // =========================
             // CUENTAS

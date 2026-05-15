@@ -122,7 +122,7 @@ namespace ConsoleAppObligatorio
                 {
                     foreach (Incidente i in incidentes)
                     {
-                        Console.WriteLine(i);
+                        Console.WriteLine(i + " :: Severidad: " + i.CalcularSeveridad());
                     }
                 }
             }

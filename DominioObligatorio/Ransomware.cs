@@ -27,5 +27,20 @@ namespace DominioObligatorio
         {
             return $"RANSOMWARE - {Descripcion}";
         }
+
+        // Se aplica Polimorfismo
+        public override int CalcularSeveridad()
+        {
+            int severidad = base.CalcularSeveridad();
+            if (_datosEncriptados) 
+                severidad += 20;
+            if (_huboExfiltracion)
+                severidad += 25;
+            if(Activo.TieneBackup) 
+                severidad -= 15;
+            if (severidad > 100)
+                severidad = 100;
+            return severidad;
+        }
     }
 }
