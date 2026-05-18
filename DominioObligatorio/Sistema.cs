@@ -25,7 +25,7 @@ namespace DominioObligatorio
             _incidentes.Add(i);
 
         }
-        // 4A
+        // 4A - Lista de Personas y sus activos asociados.
         public List<Persona> ObtenerPersonas()
         {
             return _personas;
@@ -42,7 +42,7 @@ namespace DominioObligatorio
             return resultado;
         }
 
-        // 4B
+        // 4B - Dada una persona, se listan sus incidentes.
         public List<Incidente> ObtenerIncidentesDePersona(Persona p)
         {
             if (p == null) throw new Exception("La persona no puede ser nula");
@@ -56,7 +56,7 @@ namespace DominioObligatorio
             return resultado;
         }
         
-        // 4C
+        // 4C - Alta de Persona.
         public void CrearPersona(Persona p)
         {
             if (p == null) throw new Exception("La persona no puede ser nula");
@@ -66,7 +66,7 @@ namespace DominioObligatorio
         }
         
 
-        //4D
+        // 4D - Lista de Activos que no tienen backup.
         public List<Activo> ActivosSinBackup()
         {
             List<Activo> resultado = new List<Activo>();

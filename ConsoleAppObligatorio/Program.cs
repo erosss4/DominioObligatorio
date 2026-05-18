@@ -88,7 +88,8 @@ namespace ConsoleAppObligatorio
                 Console.WriteLine("====================");
             }
         }
-
+        
+        // Se invoca al metodo CalcularSeveridad() y se hace el WriteLine del resultado para comprobar el funcionamiento del polimorfismo.
         static void OpcionIncidentesPersona()
         {
             MostrarCabezal("=== INCIDENTES DE UNA PERSONA ===");

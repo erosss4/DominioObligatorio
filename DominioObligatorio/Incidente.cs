@@ -86,6 +86,7 @@ namespace DominioObligatorio
             return $"{_id} - {_descripcion}";
         }
         
+        //Metodo para obtener los indicar que el incidente le pertenece a esa persona.
         public bool EsDePersona(Persona p)
         {
             foreach (Cuenta c in p.Cuentas)
@@ -95,7 +96,8 @@ namespace DominioObligatorio
             }
             return false;
         }
-
+        
+        // Metodo base para el calculo de la Severidad
         public virtual int CalcularSeveridad()
         {
             int severidad = Impacto * 12 + Probabilidad * 8;

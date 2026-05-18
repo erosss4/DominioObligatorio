@@ -50,6 +50,8 @@ namespace DominioObligatorio
         {
             get { return _tieneBackup; }
         }
+        
+        // Se genera un codigo autoincremental unico por cada tipo de Activo.
         private string GenerarCodigo()
         {
             int numero = 0;
