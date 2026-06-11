@@ -5,23 +5,25 @@ using System.Text;
 
 namespace DominioObligatorio
 {
-    public abstract class Persona : IValidable
+    public class Persona : IValidable
     {
         private string _cedula;
         private string _nombre;
         private string _email;
         private string _telefono;
         private string _contrasenia;
+        private Rol _miRol;
 
         private List<Cuenta> _cuentas = new List<Cuenta>();
 
-        public Persona(string cedula, string nombre, string email, string telefono, string contrasenia)
+        public Persona(string cedula, string nombre, string email, string telefono, string contrasenia, Rol miRol)
         {
             _cedula = cedula;
             _nombre = nombre;
             _email = email;
             _telefono = telefono;
             _contrasenia = contrasenia;
+            _miRol = miRol;
         }
 
         public string Cedula
@@ -47,6 +49,11 @@ namespace DominioObligatorio
         {
             get { return _contrasenia; }
         }
+        public Rol MiRol
+        {
+            get { return _miRol; }
+        }
+
 
         public List<Cuenta> Cuentas
         {
@@ -90,7 +97,6 @@ namespace DominioObligatorio
         {
             return $"{_cedula} - {_nombre}";
         }
-        public abstract string ObtenerRol();
         
     }
 }

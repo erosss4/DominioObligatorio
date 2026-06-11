@@ -1,0 +1,17 @@
+﻿@using DominioObligatorio
+
+@{
+    ViewData["Title"] = "Perfil";
+
+    Persona p = ViewBag.Persona;
+}
+
+<h1>Mi Perfil</h1>
+
+<br />
+
+<p><strong>Cédula:</strong> @p.Cedula</p>
+<p><strong>Nombre:</strong> @p.Nombre</p>
+<p><strong>Email:</strong> @p.Email</p>
+<p><strong>Teléfono:</strong> @p.Telefono</p>
+<p><strong>Rol:</strong> @p.MiRol</p>

@@ -4,11 +4,10 @@ namespace ConsoleAppObligatorio
 {
     internal class Program
     {
-        static Sistema miSistema = new Sistema();
+        static Sistema miSistema =  Sistema.Instancia;
 
         static void Main(string[] args)
         {
-            miSistema.Precargar();
 
             string opcion = "";
 
@@ -145,7 +144,7 @@ namespace ConsoleAppObligatorio
                 string telefono = LeerTexto("Ingrese teléfono: ");
                 string contrasenia = LeerTexto("Ingrese contraseña: ");
 
-                Persona p = new Operador(cedula, nombre, email, telefono, contrasenia);
+                Persona p = new Persona(cedula, nombre, email, telefono, contrasenia, Rol.OPERADOR);
 
                 miSistema.CrearPersona(p);
 
