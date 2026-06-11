@@ -3,15 +3,31 @@
 @{
     ViewData["Title"] = "Perfil";
 
-    Persona p = ViewBag.Persona;
+    Persona p = (Persona)ViewBag.Persona;
 }
 
 <h1>Mi Perfil</h1>
 
-<br />
+<hr />
 
 <p><strong>Cédula:</strong> @p.Cedula</p>
 <p><strong>Nombre:</strong> @p.Nombre</p>
 <p><strong>Email:</strong> @p.Email</p>
 <p><strong>Teléfono:</strong> @p.Telefono</p>
 <p><strong>Rol:</strong> @p.MiRol</p>
+
+<h3>Cuentas</h3>
+
+@if (p.Cuentas.Count == 0)
+{
+    <p>No posee cuentas.</p>
+}
+else
+{
+    <ul>
+        @foreach (Cuenta c in p.Cuentas)
+        {
+            <li>@c</li>
+        }
+    </ul>
+}
