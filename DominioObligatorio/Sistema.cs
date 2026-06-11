@@ -84,17 +84,18 @@ namespace DominioObligatorio
             // PERSONAS
             // =========================
 
-            Persona p1 = new Persona("12345678", "Ana García", "ana@empresa.com", "099111111");
-            Persona p2 = new Persona("22345678", "Carlos López", "carlos@empresa.com", "099222222");
-            Persona p3 = new Persona("32345678", "María Fernández", "maria@empresa.com", "099333333");
-            Persona p4 = new Persona("42345678", "Lucía Pérez", "lucia@empresa.com", "099444444");
-            Persona p5 = new Persona("52345678", "Javier Silva", "javier@empresa.com", "099555555");
-            Persona p6 = new Persona("62345678", "Sofía Rodríguez", "sofia@empresa.com", "099666666");
-            Persona p7 = new Persona("72345678", "Martín Gómez", "martin@empresa.com", "099777777");
-            Persona p8 = new Persona("82345678", "Valentina Castro", "valentina@empresa.com", "099888888");
-            Persona p9 = new Persona("92345678", "Diego Torres", "diego@empresa.com", "099999999");
-            Persona p10 = new Persona("10345678", "Camila Díaz", "camila@empresa.com", "098111111");
-            Persona p11 = new Persona("4444", "Rodolfo Antunez", "rodolfo@empresa.com", "098111111");
+            Operador p1 = new Operador("12345678", "Ana García", "ana@empresa.com", "099111111", "1234");
+            Operador p2 = new Operador("22345678", "Carlos López", "carlos@empresa.com", "099222222", "1234");
+            Operador p3 = new Operador("32345678", "María Fernández", "maria@empresa.com", "099333333", "1234");
+            Operador p4 = new Operador("42345678", "Lucía Pérez", "lucia@empresa.com", "099444444", "1234");
+            Operador p5 = new Operador("52345678", "Javier Silva", "javier@empresa.com", "099555555", "1234");
+            Operador p6 = new Operador("62345678", "Sofía Rodríguez", "sofia@empresa.com", "099666666", "1234");
+            Operador p7 = new Operador("72345678", "Martín Gómez", "martin@empresa.com", "099777777", "1234");
+            Operador p8 = new Operador("82345678", "Valentina Castro", "valentina@empresa.com", "099888888", "1234");
+            Operador p9 = new Operador("92345678", "Diego Torres", "diego@empresa.com", "099999999", "1234");
+            Operador p10 = new Operador("10345678", "Camila Díaz", "camila@empresa.com", "098111111", "1234");
+
+            Admin p11 = new Admin("4444", "Rodolfo Antunez", "rodolfo@empresa.com", "098111111", "admin");
 
             CrearPersona(p1);
             CrearPersona(p2);

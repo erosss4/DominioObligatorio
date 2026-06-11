@@ -143,8 +143,9 @@ namespace ConsoleAppObligatorio
                 string nombre = LeerTexto("Ingrese nombre: ");
                 string email = LeerTexto("Ingrese email: ");
                 string telefono = LeerTexto("Ingrese teléfono: ");
+                string contrasenia = LeerTexto("Ingrese contraseña: ");
 
-                Persona p = new Persona(cedula, nombre, email, telefono);
+                Persona p = new Operador(cedula, nombre, email, telefono, contrasenia);
 
                 miSistema.CrearPersona(p);
 

@@ -5,21 +5,23 @@ using System.Text;
 
 namespace DominioObligatorio
 {
-    public class Persona : IValidable
+    public abstract class Persona : IValidable
     {
         private string _cedula;
         private string _nombre;
         private string _email;
         private string _telefono;
+        private string _contrasenia;
 
         private List<Cuenta> _cuentas = new List<Cuenta>();
 
-        public Persona(string cedula, string nombre, string email, string telefono)
+        public Persona(string cedula, string nombre, string email, string telefono, string contrasenia)
         {
             _cedula = cedula;
             _nombre = nombre;
             _email = email;
             _telefono = telefono;
+            _contrasenia = contrasenia;
         }
 
         public string Cedula
@@ -40,6 +42,10 @@ namespace DominioObligatorio
         public string Telefono
         {
             get { return _telefono; }
+        }
+        public string Contrasenia
+        {
+            get { return _contrasenia; }
         }
 
         public List<Cuenta> Cuentas
@@ -68,6 +74,9 @@ namespace DominioObligatorio
 
             if (string.IsNullOrEmpty(_telefono))
                 throw new Exception("El teléfono no puede ser vacío");
+
+            if (string.IsNullOrEmpty(_contrasenia))
+                throw new Exception("La contraseña no puede ser vacía");
         }
 
         public override bool Equals(object? obj)
@@ -81,5 +90,7 @@ namespace DominioObligatorio
         {
             return $"{_cedula} - {_nombre}";
         }
+        public abstract string ObtenerRol();
+        
     }
 }
