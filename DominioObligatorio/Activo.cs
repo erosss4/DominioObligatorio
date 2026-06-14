@@ -77,5 +77,11 @@ namespace DominioObligatorio
         {
             return _codigo + " - " + _nombre;
         }
+        public override bool Equals(object? obj)
+        {
+            Activo a = obj as Activo;
+            return a != null && _codigo == a._codigo;
+        }
+        
     }
 }

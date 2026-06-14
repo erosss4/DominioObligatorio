@@ -58,6 +58,22 @@ namespace WebApplication1.Controllers
         }
         
         
+        [HttpPost]
+        public IActionResult Desasociar(int codigoCuenta, string codigoActivo)
+        {
+            if (HttpContext.Session.GetString("Rol") != Rol.ADMIN.ToString())
+            {
+                return View("NoAutorizado");
+            }
+
+            Cuenta cuenta = Sistema.Instancia.BuscarCuentaPorCodigo(codigoCuenta);
+            cuenta.DesasociarActivo(codigoActivo);
+            
+            // Redirijo a Activos
+            return RedirectToAction("Activos", new { codigoCuenta = codigoCuenta });
+        }
+        
+        
 
         [HttpPost]
         public IActionResult Login(string email, string pass)

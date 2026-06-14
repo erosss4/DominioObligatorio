@@ -61,5 +61,21 @@ namespace DominioObligatorio
         {
             return $"Cuenta {_codigoUsuario}";
         }
+        
+        public void DesasociarActivo(string codigoActivo)
+        {
+            Activo aQuitar = ObtenerActivoPorCodigo(codigoActivo);
+            _activos.Remove(aQuitar);   // funciona por el Equals sobreescrito (compara por código)
+        }
+
+        private Activo ObtenerActivoPorCodigo(string codigo)
+        {
+            foreach (Activo a in _activos)
+            {
+                if (a.Codigo == codigo) return a;
+            }
+            return null;
+        }
+        
     }
 }
