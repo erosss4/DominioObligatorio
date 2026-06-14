@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Cuentas";
+    Persona persona = ViewBag.Persona;
+    List<Cuenta> cuentas = ViewBag.Cuentas;
+}
+
+<h1>Cuentas de @persona.Nombre</h1>
+
+<table class="table table-hover table-striped">
+    <thead>
+    <tr>
+        <th>Código</th>
+        <th>MFA</th>
+        <th>Último cambio de contraseña</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (Cuenta c in cuentas)
+    {
+        //variable por fuera para Rider
+        string mfa = c.MfaHabilitado ? "Sí" : "No";
+        <tr>
+            <td>@c.CodigoUsuario</td>
+            <td>@mfa</td>
+            <td>@c.FechaUltimoCambioContrasenia.ToShortDateString()</td>
+            <td>
+                <a asp-action="Activos" asp-route-codigoCuenta="@c.CodigoUsuario">Ver activos</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -18,6 +18,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        //Para Ver Personas
         public IActionResult Index()
         {
             //Solo Admin
@@ -28,6 +29,20 @@ namespace WebApplication1.Controllers
             ViewBag.Personas = Sistema.Instancia.ObtenerPersonas();
             return View();
         }
+        
+        //Para Ver Cuentas
+        public IActionResult Cuentas(string cedula)
+        {
+            if (HttpContext.Session.GetString("Rol") != Rol.ADMIN.ToString())
+            {
+                return View("NoAutorizado");
+            }
+            Persona persona = Sistema.Instancia.BuscarPersonaPorCedula(cedula);
+            ViewBag.Persona = persona;
+            ViewBag.Cuentas = persona.Cuentas;
+            return View();
+        }
+        
         
 
         [HttpPost]
