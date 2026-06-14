@@ -17,6 +17,17 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
+
+        public IActionResult Index()
+        {
+            //Solo Admin
+            if (HttpContext.Session.GetString("Rol") != Rol.ADMIN.ToString())
+            {
+                return View("NoAutorizado");
+            }
+            ViewBag.Personas = Sistema.Instancia.ObtenerPersonas();
+            return View();
+        }
         
 
         [HttpPost]
@@ -54,7 +65,7 @@ namespace WebApplication1.Controllers
         public IActionResult Perfil()
         {
             if (HttpContext.Session.GetString("Email") == null)
-                return View("Noautorizado");
+                return View("NoAutorizado");
 
             ViewBag.Persona =
                 Sistema.Instancia.BuscarPersonaPorEmail(

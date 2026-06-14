@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "Personas";
+    List<Persona> personas = ViewBag.Personas;
+}
+
+<h1>Personas</h1>
+
+<table class="table table-hover table-striped">
+    <thead>
+    <tr>
+        <th>Cedula</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Telefono</th>
+        <th>Rol</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (Persona p in personas)
+    {
+        <tr>
+            <td>@p.Cedula</td>
+            <td>@p.Nombre</td>
+            <td>@p.Email</td>
+            <td>@p.Telefono</td>
+            <td>@p.MiRol</td>
+            <td>
+                <a asp-action="Cuentas" asp-route-cedula="@p.Cedula">Ver cuentas</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

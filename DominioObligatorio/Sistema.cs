@@ -338,6 +338,7 @@ namespace DominioObligatorio
             CrearIncidente(new Phishing(new DateTime(2025, 4, 10), "Intento robo credenciales", EstadoIncidente.EN_ANALISIS, 2, 4, a14, "email", true, false));
             CrearIncidente(new Ransomware(new DateTime(2025, 4, 12), "Ataque final", EstadoIncidente.CERRADO, 5, 5, a15, true, true));
         }
+        
         public Persona Login(string email, string contrasenia)
         {
             foreach (Persona p in _personas)
@@ -358,7 +359,16 @@ namespace DominioObligatorio
 
             return null;
         }
-
+        
+        public Persona BuscarPersonaPorCedula(string cedula)
+        {
+            foreach (Persona p in _personas)
+            {
+                if (p.Cedula == cedula) return p;
+            }
+            return null;
+        }
+        
     }
 
 }
