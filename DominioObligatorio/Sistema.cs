@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DominioObligatorio.Ordenadores;
 
 namespace DominioObligatorio
 {
@@ -62,7 +63,8 @@ namespace DominioObligatorio
             {
                 resultado.AddRange(c.Activos);
             }
-
+            
+            resultado.Sort(new ActivosPorCodigo());
             return resultado;
         }
 

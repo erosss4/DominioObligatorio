@@ -47,6 +47,16 @@
                                 Home
                             </a>
                         </li>
+                        @if (Context.Session.GetString("Rol") == Rol.OPERADOR.ToString())
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark"
+                            asp-controller="Activos"
+                            asp-action="Index">
+                            Mis Activos
+                            </a>
+                        </li>
+                        }
 
                     </ul>
 
