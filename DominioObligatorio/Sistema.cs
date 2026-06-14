@@ -266,8 +266,7 @@ namespace DominioObligatorio
             c1.AgregarActivo(a1);
             c1.AgregarActivo(a2);
 
-            c2.AgregarActivo(a3);
-
+            c3.AgregarActivo(a3);
             c3.AgregarActivo(a4);
             c3.AgregarActivo(a5);
 
