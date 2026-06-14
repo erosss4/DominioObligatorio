@@ -369,6 +369,18 @@ namespace DominioObligatorio
             return null;
         }
         
+        public Cuenta BuscarCuentaPorCodigo(int codigo)
+        {
+            foreach (Persona p in _personas)
+            {
+                foreach (Cuenta c in p.Cuentas)
+                {
+                    if (c.CodigoUsuario == codigo) return c;
+                }
+            }
+            return null;
+        }
+        
     }
 
 }

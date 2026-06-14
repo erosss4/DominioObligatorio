@@ -30,7 +30,7 @@ namespace WebApplication1.Controllers
             return View();
         }
         
-        //Para Ver Cuentas
+        //Para Ver Cuentas solo Admin
         public IActionResult Cuentas(string cedula)
         {
             if (HttpContext.Session.GetString("Rol") != Rol.ADMIN.ToString())
@@ -40,6 +40,20 @@ namespace WebApplication1.Controllers
             Persona persona = Sistema.Instancia.BuscarPersonaPorCedula(cedula);
             ViewBag.Persona = persona;
             ViewBag.Cuentas = persona.Cuentas;
+            return View();
+        }
+        
+        //Para Ver Activos de una Cuenta solo Admin
+        public IActionResult Activos(int codigoCuenta)
+        {
+            if (HttpContext.Session.GetString("Rol") != Rol.ADMIN.ToString())
+            {
+                return View("NoAutorizado");
+            }
+
+            Cuenta cuenta = Sistema.Instancia.BuscarCuentaPorCodigo(codigoCuenta);
+            ViewBag.Cuenta = cuenta;
+            ViewBag.Activos = cuenta.Activos;
             return View();
         }
         
