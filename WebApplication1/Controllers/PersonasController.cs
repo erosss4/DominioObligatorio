@@ -50,6 +50,9 @@ namespace WebApplication1.Controllers
             {
                 return View("NoAutorizado");
             }
+            
+            if (TempData["Exito"] != null) ViewBag.Exito = TempData["Exito"];
+            if (TempData["Error"] != null) ViewBag.Error = TempData["Error"];
 
             Cuenta cuenta = Sistema.Instancia.BuscarCuentaPorCodigo(codigoCuenta);
             ViewBag.Cuenta = cuenta;
@@ -66,9 +69,16 @@ namespace WebApplication1.Controllers
                 return View("NoAutorizado");
             }
 
-            Cuenta cuenta = Sistema.Instancia.BuscarCuentaPorCodigo(codigoCuenta);
-            cuenta.DesasociarActivo(codigoActivo);
-            
+            try
+            {
+                Cuenta cuenta = Sistema.Instancia.BuscarCuentaPorCodigo(codigoCuenta);
+                cuenta.DesasociarActivo(codigoActivo);
+                TempData["Exito"] = "Activo eliminado correctamente";
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
             // Redirijo a Activos
             return RedirectToAction("Activos", new { codigoCuenta = codigoCuenta });
         }

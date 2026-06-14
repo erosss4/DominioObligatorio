@@ -5,19 +5,26 @@
     List<Activo> activos = ViewBag.Activos;
 }
 
-<h1>Activos</h1>
+<h1>Mis Activos</h1>
 
-<table class="table table-striped ">
-    <thead>
-    <tr>
-        <th>Código</th>
-        <th>Nombre</th>
-        <th>Tipo</th>
-        <th>Criticidad</th>
-        <th>Backup</th>
-    </tr>
-    </thead>
-    <tbody>
+@if (activos == null || activos.Count == 0)
+{
+    <div class="alert alert-warning">No tenés activos asociados a tus cuentas.</div>
+}
+else
+{
+
+    <table class="table table-striped ">
+        <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Criticidad</th>
+            <th>Backup</th>
+        </tr>
+        </thead>
+        <tbody>
         @foreach (Activo a in activos)
         {
             string backup = a.TieneBackup ? "Sí" : "No";
@@ -29,5 +36,6 @@
                 <td>@backup</td>
             </tr>
         }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+}

@@ -6,6 +6,23 @@
 
 <h1>Activos de la cuenta @cuenta.CodigoUsuario</h1>
 
+@if (ViewBag.Exito != null)
+{
+    <div class="alert alert-success">@ViewBag.Exito</div>
+}
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+@if (activos == null || activos.Count == 0)
+{
+    <div class="alert alert-warning">Esta cuenta no tiene activos.</div>
+}
+else
+{
+    
+
 <table class="table">
     <thead>
     <tr>
@@ -39,3 +56,4 @@
     }
     </tbody>
 </table>
+}
