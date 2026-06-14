@@ -87,6 +87,7 @@ namespace DominioObligatorio
         {
             if (p == null) throw new Exception("La persona no puede ser nula");
             if (_personas.Contains(p)) throw new Exception("La cedula ya existe");
+            if (BuscarPersonaPorEmail(p.Email) != null) throw new Exception("El email ya está registrado");
             p.Validar();
             _personas.Add(p);
         }

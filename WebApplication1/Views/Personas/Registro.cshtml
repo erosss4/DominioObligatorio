@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "Registro";
+}
+
+<h1>Registrarse como Operador</h1>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<form method="post" action="/Personas/Registro">
+    <div class="mb-3">
+        <label>Cedula</label>
+        <input type="text" name="cedula" class="form-control" value="@ViewBag.cedula" />
+    </div>
+    <div class="mb-3">
+        <label>Nombre</label>
+        <input type="text" name="nombre" class="form-control" value="@ViewBag.nombre" />
+    </div>
+    <div class="mb-3">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" value="@ViewBag.email" />
+    </div>
+    <div class="mb-3">
+        <label>Teléfono</label>
+        <input type="text" name="telefono" class="form-control" value="@ViewBag.telefono" />
+    </div>
+    <div class="mb-3">
+        <label>Contraseña</label>
+        <input type="password" name="contrasenia" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Registrarse</button>
+</form>
