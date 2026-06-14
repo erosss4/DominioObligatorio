@@ -47,7 +47,7 @@ namespace WebApplication1.Controllers
         public IActionResult Perfil()
         {
             if (HttpContext.Session.GetString("Email") == null)
-                return View("NoAutorizado");
+                return View("Noautorizado");
 
             ViewBag.Persona =
                 Sistema.Instancia.BuscarPersonaPorEmail(

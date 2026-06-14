@@ -48,6 +48,12 @@ namespace DominioObligatorio
         {
             return _personas;
         }
+
+        public List<Activo> ObtenerActivos()
+        {
+            return _activos;
+        }
+        
         public List<Activo> ObtenerActivosDePersona(Persona p)
         {
             if (p == null) throw new Exception("La persona no puede ser nula");
@@ -96,7 +102,7 @@ namespace DominioObligatorio
             return resultado;
         }
 
-        public void Precargar()
+        private void Precargar()
         {
             // =========================
             // PERSONAS

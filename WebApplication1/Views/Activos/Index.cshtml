@@ -1,0 +1,33 @@
+
+
+@{
+    ViewData["Title"] = "Activos";
+    List<Activo> activos = ViewBag.Activos;
+}
+
+<h1>Activos</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Criticidad</th>
+        <th>Backup</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (Activo a in activos)
+        {
+            string backup = a.TieneBackup ? "Sí" : "No";
+            <tr>
+                <td>@a.Codigo</td>
+                <td>@a.Nombre</td>
+                <td>@a.TipoActivo</td>
+                <td>@a.Criticidad</td>
+                <td>@backup</td>
+            </tr>
+        }
+    </tbody>
+</table>
