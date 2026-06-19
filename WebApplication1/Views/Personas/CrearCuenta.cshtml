@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Crear cuenta";
+}
+
+<h1>
+    Crear Cuenta
+</h1>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+<form method="post" asp-action="CrearCuenta">
+    <input type="hidden" name="cedula" value="@ViewBag.Cedula"/>
+    
+    <div class="mb-3 form-check">
+        <input type="checkbox" name="mfa" value="true" class="form-check-input" id="mfa"/>
+        <label class="form-check-label" for="mfa">MFA habilitado</label>
+    </div>
+    <div class="mb-3">
+        <label>Fecha del último cambio de contraseña</label>
+        <input type="date" name="fecha" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Crear cuenta</button>
+</form>

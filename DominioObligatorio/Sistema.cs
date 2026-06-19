@@ -92,6 +92,18 @@ namespace DominioObligatorio
             _personas.Add(p);
         }
         
+        // Obligatorio 2  - Crear Cuenta
+        public void CrearCuenta(string cedula, bool mfa, DateTime fechaUltimoCambio)
+        {
+            Persona p = BuscarPersonaPorCedula(cedula);
+            if(p == null) throw new Exception("La persona no puede ser nulo");
+            if (p.MiRol != Rol.OPERADOR) throw new Exception("Solo se puede crear cuentas a OPERADORES");
+
+            Cuenta c = new Cuenta(mfa, fechaUltimoCambio);
+            c.Validar(); // Aca se valida que la fecha no sea por defecto
+            p.AgregarCuenta(c); // la cuenta se asigna a la persona
+        }
+        
 
         // 4D - Lista de Activos que no tienen backup.
         public List<Activo> ActivosSinBackup()

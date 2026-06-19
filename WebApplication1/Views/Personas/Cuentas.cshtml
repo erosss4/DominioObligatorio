@@ -6,6 +6,20 @@
 
 <h1>Cuentas de @persona.Nombre</h1>
 
+@if (ViewBag.Exito != null)
+{
+    <div class="alert alert-success">@ViewBag.Exito</div>
+}
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">@ViewBag.Error</div>
+}
+
+@if (persona.MiRol == Rol.OPERADOR)
+{
+    <a asp-action="CrearCuenta" asp-route-cedula="@persona.Cedula" class="btn btn-primary mb-3">Crear nueva cuenta</a>
+}
+
 <table class="table table-hover table-striped">
     <thead>
     <tr>

@@ -34,13 +34,17 @@ namespace WebApplication1.Controllers
         public IActionResult Cuentas(string cedula)
         {
             if (HttpContext.Session.GetString("Rol") != Rol.ADMIN.ToString())
-            {
-                return View("NoAutorizado");
-            }
+            return View("NoAutorizado");
+            
+            // TempData para el agregar Cuenta.
+            if(TempData["Exito"] != null) ViewBag.Exito = TempData["Exito"];
+            if(TempData["Error"] != null) ViewBag.Error = TempData["Error"];
+                
             Persona persona = Sistema.Instancia.BuscarPersonaPorCedula(cedula);
             ViewBag.Persona = persona;
             ViewBag.Cuentas = persona.Cuentas;
             return View();
+            
         }
         
         //Para Ver Activos de una Cuenta solo Admin
@@ -157,5 +161,35 @@ namespace WebApplication1.Controllers
             }
         }
         
+        // Alta de Cuenta
+        [HttpGet]
+        public IActionResult CrearCuenta(string cedula)
+        {
+            if(HttpContext.Session.GetString("Rol") != Rol.ADMIN.ToString())
+                return View("NoAutorizado");
+            
+            ViewBag.Cedula = cedula;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CrearCuenta(string cedula, bool mfa, DateTime fecha)
+        {
+            if (HttpContext.Session.GetString("Rol") != Rol.ADMIN.ToString())
+                return View("NoAutorizado");
+
+            try
+            {
+                Sistema.Instancia.CrearCuenta(cedula, mfa, fecha);
+                TempData["Exito"] = "Cuenta creada correctamente";
+                return RedirectToAction("Cuentas", new {cedula = cedula});
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                ViewBag.Cedula = cedula;
+                return View();
+            }
+        }
     }
 }
