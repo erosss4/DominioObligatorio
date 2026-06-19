@@ -105,6 +105,12 @@ namespace DominioObligatorio
             return resultado;
         }
 
+        public List<Incidente> ObtenerIncidentes()
+        {
+            _incidentes.Sort(new IncidentesPorSeveridad());
+            return _incidentes;
+        }
+
         private void Precargar()
         {
             // =========================
