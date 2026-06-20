@@ -1,0 +1,42 @@
+@{
+    ViewData["Title"] = "Crar activo";
+}
+
+<h1>Crear activo</h1>
+
+@if (ViewBag.Error != null)
+{
+    <div class = "alert alert-danger">@ViewBag.Error</div>
+}
+<form method="post" asp-action="CrearActivo">
+    <input type="hidden" name="codigoCuenta" value="@ViewBag.CodigoCuenta"/>
+    
+    <label>Nombre: 
+        <input type="text" name="nombre" class="form-control"/>
+    </label>
+    
+    <label>Tipo: 
+        <select name="tipo" class="form-select">
+            <option value="PC">PC</option>
+            <option value="SERVER">SERVER</option>
+            <option value="MOVIL">MOVIL</option>
+        </select>
+    </label>
+    
+    <label>Criticidad: 
+        <select name="criticidad" class="form-select">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </label>
+    
+    <label>Tiene backup: 
+        <input type="checkbox" name="backup" value="true" class="form-check-input"/>
+    </label>
+    
+    <button type="submit" class="btn btn-primary">Crear activo</button>
+    
+</form>

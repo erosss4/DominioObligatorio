@@ -191,5 +191,36 @@ namespace WebApplication1.Controllers
                 return View();
             }
         }
+        
+        // Alta de Activo
+        [HttpGet]
+        public IActionResult CrearActivo(int codigoCuenta)
+        {
+            if (HttpContext.Session.GetString("Rol") != Rol.ADMIN.ToString())
+                return View("NoAutorizado");
+            
+            ViewBag.CodigoCuenta = codigoCuenta;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CrearActivo(int codigoCuenta, string nombre, TipoActivo tipo, int criticidad, bool backup)
+        {
+            if (HttpContext.Session.GetString("Rol") != Rol.ADMIN.ToString())
+                return View("NoAutorizado");
+
+            try
+            {
+                Sistema.Instancia.CrearActivoPorCuenta(codigoCuenta, nombre, tipo, criticidad, backup);
+                TempData["Exito"] = "Activo creada correctamente";
+                return RedirectToAction("Activos", new {codigoCuenta = codigoCuenta});
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                ViewBag.CodigoCuenta = codigoCuenta;
+                return View();
+            }
+        }
     }
 }

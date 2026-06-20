@@ -14,7 +14,7 @@
 {
     <div class="alert alert-danger">@ViewBag.Error</div>
 }
-
+<a asp-action="CrearActivo" asp-route-codigoCuenta="@cuenta.CodigoUsuario" class="btn btn-primary mb-3">Crear activo</a>
 @if (activos == null || activos.Count == 0)
 {
     <div class="alert alert-warning">Esta cuenta no tiene activos.</div>

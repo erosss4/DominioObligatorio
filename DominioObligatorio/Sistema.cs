@@ -103,6 +103,17 @@ namespace DominioObligatorio
             c.Validar(); // Aca se valida que la fecha no sea por defecto
             p.AgregarCuenta(c); // la cuenta se asigna a la persona
         }
+
+        public void CrearActivoPorCuenta(int codigoCuenta, string nombre, TipoActivo tipo, int criticidad,
+            bool tieneBackup)
+        {
+            Cuenta cuenta = BuscarCuentaPorCodigo(codigoCuenta);
+            if (cuenta == null) throw new Exception("No existe la cuenta");
+
+            Activo a = new Activo(nombre, tipo, criticidad, tieneBackup);
+            CrearActivo(a); // ya se valida
+            cuenta.AgregarActivo(a); // lo asocia a la cuenta (seleccionada) que se pasa por parametro.
+        }
         
 
         // 4D - Lista de Activos que no tienen backup.
