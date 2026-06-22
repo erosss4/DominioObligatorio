@@ -4,16 +4,22 @@
     ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Seguimiento de Incidentes de Ciberseguridad</h1>
+<div class="d-flex justify-content-center align-items-center" style="height:70vh;">
 
-    @if (Context.Session.GetString("Email") == null)
-    {
-        <p>Ingrese al sistema o regístrese como operador para acceder a las funcionalidades disponibles.</p>
-    }
-    else
-    {
-        <p>Bienvenido/a, @Context.Session.GetString("Nombre").</p>
-        <p>Rol actual: @Context.Session.GetString("Rol")</p>
-    }
+    <div class="text-center">
+
+        <h1 class="display-4">Seguimiento de Incidentes de Ciberseguridad</h1>
+
+        @if (Context.Session.GetString("Email") == null)
+        {
+            <p>Ingrese al sistema o regístrese como operador para acceder a las funcionalidades disponibles.</p>
+        }
+        else
+        {
+            <p>Bienvenido/a, @Context.Session.GetString("Nombre").</p>
+            <p>Rol actual: @Context.Session.GetString("Rol")</p>
+        }
+
+    </div>
+
 </div>
