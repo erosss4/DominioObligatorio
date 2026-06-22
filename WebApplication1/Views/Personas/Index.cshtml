@@ -5,7 +5,7 @@
 
 <h1>Personas</h1>
 
-<table class="table table-hover table-striped">
+<table class="table table-striped table-hover align-middle">
     <thead>
     <tr>
         <th>Cedula</th>
@@ -26,7 +26,11 @@
             <td>@p.Telefono</td>
             <td>@p.MiRol</td>
             <td>
-                <a asp-action="Cuentas" asp-route-cedula="@p.Cedula">Ver cuentas</a>
+                    <a asp-action="Cuentas"
+                       asp-route-cedula="@p.Cedula"
+                       class="btn btn-primary btn-sm">
+                        Ver cuentas
+                    </a>
             </td>
         </tr>
     }

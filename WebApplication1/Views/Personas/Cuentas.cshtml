@@ -10,6 +10,7 @@
 {
     <div class="alert alert-success">@ViewBag.Exito</div>
 }
+
 @if (ViewBag.Error != null)
 {
     <div class="alert alert-danger">@ViewBag.Error</div>
@@ -17,31 +18,46 @@
 
 @if (persona.MiRol == Rol.OPERADOR)
 {
-    <a asp-action="CrearCuenta" asp-route-cedula="@persona.Cedula" class="btn btn-primary mb-3">Crear nueva cuenta</a>
+    <a asp-action="CrearCuenta" asp-route-cedula="@persona.Cedula" class="btn btn-primary mb-3">
+        Crear nueva cuenta
+    </a>
 }
 
-<table class="table table-hover table-striped">
-    <thead>
-    <tr>
-        <th>Código</th>
-        <th>MFA</th>
-        <th>Último cambio de contraseña</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (Cuenta c in cuentas)
-    {
-        //variable por fuera para Rider
-        string mfa = c.MfaHabilitado ? "Sí" : "No";
+@if (cuentas.Count == 0)
+{
+    <div class="alert alert-warning">
+        Esta persona no tiene cuentas asociadas.
+    </div>
+}
+else
+{
+    <table class="table table-striped table-hover align-middle">
+        <thead>
         <tr>
-            <td>@c.CodigoUsuario</td>
-            <td>@mfa</td>
-            <td>@c.FechaUltimoCambioContrasenia.ToShortDateString()</td>
-            <td>
-                <a asp-action="Activos" asp-route-codigoCuenta="@c.CodigoUsuario">Ver activos</a>
-            </td>
+            <th>Código</th>
+            <th>MFA</th>
+            <th>Último cambio de contraseña</th>
+            <th></th>
         </tr>
-    }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        @foreach (Cuenta c in cuentas)
+        {
+            string mfa = c.MfaHabilitado ? "Sí" : "No";
+
+            <tr>
+                <td>@c.CodigoUsuario</td>
+                <td>@mfa</td>
+                <td>@c.FechaUltimoCambioContrasenia.ToShortDateString()</td>
+                <td>
+                        <a asp-action="Activos"
+                           asp-route-codigoCuenta="@c.CodigoUsuario"
+                           class="btn btn-primary btn-sm">
+                            Ver activos
+                        </a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
