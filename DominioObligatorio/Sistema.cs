@@ -28,8 +28,21 @@ namespace DominioObligatorio
         {
             Precargar();
         }
-
-
+        
+    // =========================
+    // ALTAS
+    // =========================
+    
+        // 4C - Alta de Persona.
+        public void CrearPersona(Persona p)
+        {
+            if (p == null) throw new Exception("La persona no puede ser nula");
+            if (_personas.Contains(p)) throw new Exception("La cedula ya existe");
+            if (BuscarPersonaPorEmail(p.Email) != null) throw new Exception("El email ya está registrado");
+            p.Validar();
+            _personas.Add(p);
+        }
+        
         public void CrearActivo(Activo a)
         {
             if (a == null) throw new Exception("El activo no puede ser nulo");
@@ -44,6 +57,35 @@ namespace DominioObligatorio
             _incidentes.Add(i);
 
         }
+            
+        // Obligatorio 2  - Crear Cuenta
+        public void CrearCuenta(string cedula, bool mfa, DateTime fechaUltimoCambio)
+        {
+            Persona p = BuscarPersonaPorCedula(cedula);
+            if(p == null) throw new Exception("La persona no puede ser nulo");
+            if (p.MiRol != Rol.OPERADOR) throw new Exception("Solo se puede crear cuentas a OPERADORES");
+
+            Cuenta c = new Cuenta(mfa, fechaUltimoCambio);
+            c.Validar(); // Aca se valida que la fecha no sea por defecto
+            p.AgregarCuenta(c); // la cuenta se asigna a la persona
+        }
+
+        public void CrearActivoPorCuenta(int codigoCuenta, string nombre, TipoActivo tipo, int criticidad,
+            bool tieneBackup)
+        {
+            Cuenta cuenta = BuscarCuentaPorCodigo(codigoCuenta);
+            if (cuenta == null) throw new Exception("No existe la cuenta");
+
+            Activo a = new Activo(nombre, tipo, criticidad, tieneBackup);
+            CrearActivo(a); // ya se valida
+            cuenta.AgregarActivo(a); // lo asocia a la cuenta (seleccionada) que se pasa por parametro.
+        }
+        
+    // =========================
+    // LISTAS 
+    // =========================
+    
+        
         // 4A - Lista de Personas y sus activos asociados.
         public List<Persona> ObtenerPersonas()
         {
@@ -81,40 +123,6 @@ namespace DominioObligatorio
             }
             return resultado;
         }
-        
-        // 4C - Alta de Persona.
-        public void CrearPersona(Persona p)
-        {
-            if (p == null) throw new Exception("La persona no puede ser nula");
-            if (_personas.Contains(p)) throw new Exception("La cedula ya existe");
-            if (BuscarPersonaPorEmail(p.Email) != null) throw new Exception("El email ya está registrado");
-            p.Validar();
-            _personas.Add(p);
-        }
-        
-        // Obligatorio 2  - Crear Cuenta
-        public void CrearCuenta(string cedula, bool mfa, DateTime fechaUltimoCambio)
-        {
-            Persona p = BuscarPersonaPorCedula(cedula);
-            if(p == null) throw new Exception("La persona no puede ser nulo");
-            if (p.MiRol != Rol.OPERADOR) throw new Exception("Solo se puede crear cuentas a OPERADORES");
-
-            Cuenta c = new Cuenta(mfa, fechaUltimoCambio);
-            c.Validar(); // Aca se valida que la fecha no sea por defecto
-            p.AgregarCuenta(c); // la cuenta se asigna a la persona
-        }
-
-        public void CrearActivoPorCuenta(int codigoCuenta, string nombre, TipoActivo tipo, int criticidad,
-            bool tieneBackup)
-        {
-            Cuenta cuenta = BuscarCuentaPorCodigo(codigoCuenta);
-            if (cuenta == null) throw new Exception("No existe la cuenta");
-
-            Activo a = new Activo(nombre, tipo, criticidad, tieneBackup);
-            CrearActivo(a); // ya se valida
-            cuenta.AgregarActivo(a); // lo asocia a la cuenta (seleccionada) que se pasa por parametro.
-        }
-        
 
         // 4D - Lista de Activos que no tienen backup.
         public List<Activo> ActivosSinBackup()
@@ -133,8 +141,64 @@ namespace DominioObligatorio
             _incidentes.Sort(new IncidentesPorSeveridad());
             return _incidentes;
         }
+        
+    // =========================
+    // BUSQUEDAS
+    // =========================
+        
+        public Persona? BuscarPersonaPorEmail(string email)
+        {
+            foreach (Persona p in _personas)
+            {
+                if (p.Email == email)
+                    return p;
+            }
 
-        private void Precargar()
+            return null;
+        }
+        
+        public Persona? BuscarPersonaPorCedula(string cedula)
+        {
+            foreach (Persona p in _personas)
+            {
+                if (p.Cedula == cedula) return p;
+            }
+            return null;
+        }
+        
+        public Cuenta? BuscarCuentaPorCodigo(int codigo)
+        {
+            foreach (Persona p in _personas)
+            {
+                foreach (Cuenta c in p.Cuentas)
+                {
+                    if (c.CodigoUsuario == codigo) return c;
+                }
+            }
+            return null;
+        }
+        
+    // =========================
+    // LOGIN
+    // =========================
+        
+        
+        public Persona Login(string email, string contrasenia)
+        {
+            foreach (Persona p in _personas)
+            {
+                if (p.Email == email && p.Contrasenia == contrasenia)
+                    return p;
+            }
+
+            throw new Exception("Usuario o contraseña incorrecta");
+        }
+        
+    // =========================
+    // PRECARGA
+    // =========================
+        
+         private void Precargar()
         {
             // =========================
             // PERSONAS
@@ -366,48 +430,6 @@ namespace DominioObligatorio
             CrearIncidente(new Ransomware(new DateTime(2025, 4, 8), "Servidor QA afectado", EstadoIncidente.ABIERTO, 4, 5, a13, true, false));
             CrearIncidente(new Phishing(new DateTime(2025, 4, 10), "Intento robo credenciales", EstadoIncidente.EN_ANALISIS, 2, 4, a14, "email", true, false));
             CrearIncidente(new Ransomware(new DateTime(2025, 4, 12), "Ataque final", EstadoIncidente.CERRADO, 5, 5, a15, true, true));
-        }
-        
-        public Persona Login(string email, string contrasenia)
-        {
-            foreach (Persona p in _personas)
-            {
-                if (p.Email == email && p.Contrasenia == contrasenia)
-                    return p;
-            }
-
-            throw new Exception("Usuario o contraseña incorrecta");
-        }
-        public Persona BuscarPersonaPorEmail(string email)
-        {
-            foreach (Persona p in _personas)
-            {
-                if (p.Email == email)
-                    return p;
-            }
-
-            return null;
-        }
-        
-        public Persona BuscarPersonaPorCedula(string cedula)
-        {
-            foreach (Persona p in _personas)
-            {
-                if (p.Cedula == cedula) return p;
-            }
-            return null;
-        }
-        
-        public Cuenta BuscarCuentaPorCodigo(int codigo)
-        {
-            foreach (Persona p in _personas)
-            {
-                foreach (Cuenta c in p.Cuentas)
-                {
-                    if (c.CodigoUsuario == codigo) return c;
-                }
-            }
-            return null;
         }
         
     }
